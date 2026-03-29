@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kitfly.app/schemas/v0/plugins.schema.json",
+  "$version": "0.2.0",
+  "title": "Plugin Configuration",
+  "description": "Configuration for enabling Kitfly plugins (kitfly.plugins.yaml). Canonical plugins are specified as pinned strings (name@x.y.z). Third-party plugins are objects and require explicit opt-in at build/dev time.",
+  "type": "object",
+  "required": [
+    "plugins"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Schema reference for validation"
+    },
+    "plugins": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "oneOf": [
+          {
+            "type": "string",
+            "description": "Canonical plugin reference with strict version pinning (name@x.y.z).",
+            "pattern": "^[a-z][a-z0-9-]*@(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$",
+            "examples": [
+              "latex@1.0.0",
+              "slides-widgets@0.2.0-beta.1"
+            ]
+          },
+          {
+            "type": "object",
+            "description": "Third-party plugin reference (requires --allow-untrusted).",
+            "required": [
+              "name",
+              "source",
+              "sha256"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Plugin identifier (used for caching and logging).",
+                "pattern": "^[a-z][a-z0-9-]*$",
+                "minLength": 1,
+                "maxLength": 40
+              },
+              "source": {
+                "type": "string",
+                "description": "Plugin source locator (e.g. github:owner/repo@ref or https://... ).",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "sha256": {
+                "type": "string",
+                "description": "Expected SHA256 checksum (hex) for the fetched plugin bundle.",
+                "pattern": "^[0-9a-fA-F]{64}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "$schema": "./schemas/v0/plugins.schema.json",
+      "plugins": [
+        "latex@1.0.0",
+        "callouts@1.2.0"
+      ]
+    },
+    {
+      "$schema": "./schemas/v0/plugins.schema.json",
+      "plugins": [
+        {
+          "name": "custom-plugin",
+          "source": "github:someuser/their-plugin@v1.0.0",
+          "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+        }
+      ]
+    }
+  ]
+}

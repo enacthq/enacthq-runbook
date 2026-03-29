@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kitfly.app/schemas/v0/plugin.schema.json",
+  "$version": "0.2.0",
+  "title": "Plugin Manifest",
+  "description": "Contract for kitfly plugins (plugin.yaml). Plugins are atomic (no plugin-to-plugin dependencies).",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "contract",
+    "description",
+    "license",
+    "kitfly",
+    "main"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Schema reference for validation"
+    },
+    "name": {
+      "type": "string",
+      "description": "Plugin identifier (used as registry key and folder name)",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "minLength": 1,
+      "maxLength": 40,
+      "examples": [
+        "latex",
+        "callouts",
+        "slides-widgets"
+      ]
+    },
+    "version": {
+      "$ref": "./common.schema.json#/$defs/semver"
+    },
+    "contract": {
+      "type": "string",
+      "description": "Plugin contract version this plugin implements (stringified integer)",
+      "pattern": "^[0-9]+$",
+      "examples": [
+        "1"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Short human-readable description of the plugin",
+      "minLength": 1,
+      "maxLength": 140
+    },
+    "license": {
+      "type": "string",
+      "description": "License identifier (typically SPDX, e.g. MIT)",
+      "minLength": 1,
+      "maxLength": 50,
+      "examples": [
+        "MIT"
+      ]
+    },
+    "kitfly": {
+      "$ref": "./common.schema.json#/$defs/semverRange"
+    },
+    "dependencies": {
+      "type": "object",
+      "description": "External resources required by the plugin (plugin-to-plugin dependencies are not allowed)",
+      "properties": {
+        "cdn": {
+          "type": "array",
+          "description": "External CDN resources (SRI integrity is required for every entry)",
+          "items": {
+            "$ref": "#/$defs/cdnResource"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "hooks": {
+      "type": "object",
+      "description": "Hook declarations (unknown hooks are invalid)",
+      "properties": {
+        "marked-extension": {
+          "type": "boolean",
+          "description": "Plugin provides a marked extension"
+        },
+        "template-head": {
+          "type": "boolean",
+          "description": "Plugin injects content into <head>"
+        },
+        "template-body-end": {
+          "type": "boolean",
+          "description": "Plugin injects content before </body>"
+        }
+      },
+      "additionalProperties": false
+    },
+    "main": {
+      "type": "string",
+      "description": "Plugin entry point (relative path within the plugin package)",
+      "pattern": "^[^\\0]+\\.(ts|js)$",
+      "examples": [
+        "index.ts"
+      ]
+    },
+    "test-docs": {
+      "type": "array",
+      "description": "Glob patterns for validation corpus docs used in kitfly plugin testing",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "examples": [
+        [
+          "test-docs/latex-samples/*.md"
+        ]
+      ]
+    },
+    "modes": {
+      "$ref": "./common.schema.json#/$defs/kitflyModesAllowlist"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "cdnResource": {
+      "type": "object",
+      "required": [
+        "url",
+        "integrity"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "CDN URL (HTTPS required)",
+          "pattern": "^https://.+",
+          "minLength": 9
+        },
+        "integrity": {
+          "$ref": "./common.schema.json#/$defs/sriIntegrity"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "$schema": "./schemas/v0/plugin.schema.json",
+      "name": "latex",
+      "version": "1.0.0",
+      "contract": "1",
+      "description": "LaTeX/KaTeX math rendering",
+      "license": "MIT",
+      "kitfly": ">=0.2.0 <1.0.0",
+      "dependencies": {
+        "cdn": [
+          {
+            "url": "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js",
+            "integrity": "sha384-abcDEF123+/="
+          },
+          {
+            "url": "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css",
+            "integrity": "sha384-abcDEF123+/="
+          }
+        ]
+      },
+      "hooks": {
+        "marked-extension": true,
+        "template-head": true
+      },
+      "main": "index.ts",
+      "test-docs": [
+        "test-docs/latex-samples/*.md"
+      ]
+    }
+  ]
+}

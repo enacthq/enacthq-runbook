@@ -1,0 +1,19 @@
+# Build output
+dist/
+bundles/
+
+# Dependencies (if using kitfly as dependency)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*~
+
+# Logs
+*.log

@@ -1,0 +1,187 @@
+{
+  "kitflyVersion": "0.2.3",
+  "createdAt": "2026-03-29T18:38:34.441Z",
+  "template": "runbook",
+  "files": [
+    {
+      "path": "scripts/dev.ts",
+      "sourceHash": "fa94a1b848ede836bb8f36eb9cbd5d18c127d931725d88f1d1fc4661f196810d",
+      "localHash": "fa94a1b848ede836bb8f36eb9cbd5d18c127d931725d88f1d1fc4661f196810d",
+      "modified": false
+    },
+    {
+      "path": "scripts/build.ts",
+      "sourceHash": "7e79f39a9224390de9c5f09e3f013f5005a1d9e648e83e76a9c73ae0ce7d53fe",
+      "localHash": "7e79f39a9224390de9c5f09e3f013f5005a1d9e648e83e76a9c73ae0ce7d53fe",
+      "modified": false
+    },
+    {
+      "path": "scripts/bundle.ts",
+      "sourceHash": "2eec15a91dcde80adfe8889ecd1ed3314f74715e5f63caa63ad7524d258ca69b",
+      "localHash": "2eec15a91dcde80adfe8889ecd1ed3314f74715e5f63caa63ad7524d258ca69b",
+      "modified": false
+    },
+    {
+      "path": "src/shared.ts",
+      "sourceHash": "6ad06340906dbfb8f8fc0567995464a1ed534f78496fb85d7480327825a39982",
+      "localHash": "6ad06340906dbfb8f8fc0567995464a1ed534f78496fb85d7480327825a39982",
+      "modified": false
+    },
+    {
+      "path": "src/engine.ts",
+      "sourceHash": "c5b79ecbeb2ce2fbcf247bbaea94ef655719dd77f6950a119f6ed6224e43939b",
+      "localHash": "c5b79ecbeb2ce2fbcf247bbaea94ef655719dd77f6950a119f6ed6224e43939b",
+      "modified": false
+    },
+    {
+      "path": "src/theme.ts",
+      "sourceHash": "5c5828abf64a1a4474bae644a87d0075d2a744d0e6c7c835c01ee0fa65263f1b",
+      "localHash": "5c5828abf64a1a4474bae644a87d0075d2a744d0e6c7c835c01ee0fa65263f1b",
+      "modified": false
+    },
+    {
+      "path": "src/plugin-loader.ts",
+      "sourceHash": "67613fe7efe374a4fd91c8fdfae2b5b6ba89b6a4fab51826ff73bebf56f50e6f",
+      "localHash": "67613fe7efe374a4fd91c8fdfae2b5b6ba89b6a4fab51826ff73bebf56f50e6f",
+      "modified": false
+    },
+    {
+      "path": "schemas/README.md",
+      "sourceHash": "8648e7986f757c5edd29045b4c7adc6fa779e1c10ff1d467bbe123c1a257b8bb",
+      "localHash": "8648e7986f757c5edd29045b4c7adc6fa779e1c10ff1d467bbe123c1a257b8bb",
+      "modified": false
+    },
+    {
+      "path": "schemas/site.schema.json",
+      "sourceHash": "47836652a4a3b76a2f2ed429921492971c405edf7bc559200a33ad5d2f05491c",
+      "localHash": "47836652a4a3b76a2f2ed429921492971c405edf7bc559200a33ad5d2f05491c",
+      "modified": false
+    },
+    {
+      "path": "schemas/theme.schema.json",
+      "sourceHash": "ab011b887eb90c99a660f0d2a22bfd6815381a740b8ff54026e11edb2598a22d",
+      "localHash": "ab011b887eb90c99a660f0d2a22bfd6815381a740b8ff54026e11edb2598a22d",
+      "modified": false
+    },
+    {
+      "path": "schemas/plugin.schema.json",
+      "sourceHash": "7bf50092d21699227e4adb962c95dfcb72b81b470e7e2268e833a1618f8cd6e6",
+      "localHash": "7bf50092d21699227e4adb962c95dfcb72b81b470e7e2268e833a1618f8cd6e6",
+      "modified": false
+    },
+    {
+      "path": "schemas/plugin-registry.schema.json",
+      "sourceHash": "a1fc34fea1b2eec966259a29d5ab07f90cbd7ec8f720faebeaef2117427e2cc9",
+      "localHash": "a1fc34fea1b2eec966259a29d5ab07f90cbd7ec8f720faebeaef2117427e2cc9",
+      "modified": false
+    },
+    {
+      "path": "schemas/plugins.schema.json",
+      "sourceHash": "b9f74e78f3b748f9a9d6108e3a842fcfcc5a4fd5c54bad262c7789461ccfa1b0",
+      "localHash": "b9f74e78f3b748f9a9d6108e3a842fcfcc5a4fd5c54bad262c7789461ccfa1b0",
+      "modified": false
+    },
+    {
+      "path": "schemas/v0/site.schema.json",
+      "sourceHash": "63622617cffeef39bc9dda8ed0259f3ed5e371eee74d995572e28d977a3b590c",
+      "localHash": "63622617cffeef39bc9dda8ed0259f3ed5e371eee74d995572e28d977a3b590c",
+      "modified": false
+    },
+    {
+      "path": "schemas/v0/theme.schema.json",
+      "sourceHash": "7e3d4353dd60abc169b7ac16bf2ed1c0a1f268ad8247395415911792ddf16914",
+      "localHash": "7e3d4353dd60abc169b7ac16bf2ed1c0a1f268ad8247395415911792ddf16914",
+      "modified": false
+    },
+    {
+      "path": "schemas/v0/common.schema.json",
+      "sourceHash": "817a304e8bf3587b6363287d876b3a1f60210b50b134496c626c01b7c84af2ad",
+      "localHash": "817a304e8bf3587b6363287d876b3a1f60210b50b134496c626c01b7c84af2ad",
+      "modified": false
+    },
+    {
+      "path": "schemas/v0/plugin.schema.json",
+      "sourceHash": "5dda74cd2679ce3c95d3f2ee2b5b705fb9d34e6fb3232dec725ffe9742c14124",
+      "localHash": "5dda74cd2679ce3c95d3f2ee2b5b705fb9d34e6fb3232dec725ffe9742c14124",
+      "modified": false
+    },
+    {
+      "path": "schemas/v0/plugin-registry.schema.json",
+      "sourceHash": "aa160dba66689e2766a3cad38e263fa10e0aed0f8fd54140bda883868abad915",
+      "localHash": "aa160dba66689e2766a3cad38e263fa10e0aed0f8fd54140bda883868abad915",
+      "modified": false
+    },
+    {
+      "path": "schemas/v0/plugins.schema.json",
+      "sourceHash": "443e8642af605d10008b0383b88aff1813f9d493a8d5e5964923e434698b2c31",
+      "localHash": "443e8642af605d10008b0383b88aff1813f9d493a8d5e5964923e434698b2c31",
+      "modified": false
+    },
+    {
+      "path": "src/site/template.html",
+      "sourceHash": "b3f0f005e037373d08df098760c49f5f9e51dd3452ad6d929135c5ba7dada6ad",
+      "localHash": "b3f0f005e037373d08df098760c49f5f9e51dd3452ad6d929135c5ba7dada6ad",
+      "modified": false
+    },
+    {
+      "path": "src/site/styles.css",
+      "sourceHash": "f145c281a4982db4ec24b10c76ab1fe13139780398c03dcbf082465f9583be4e",
+      "localHash": "f145c281a4982db4ec24b10c76ab1fe13139780398c03dcbf082465f9583be4e",
+      "modified": false
+    },
+    {
+      "path": "registry/plugins.yaml",
+      "sourceHash": "89153e611692fbfa7978aa5ec46cf06eeb63dba7c2fcef164e45e6370717ace7",
+      "localHash": "89153e611692fbfa7978aa5ec46cf06eeb63dba7c2fcef164e45e6370717ace7",
+      "modified": false
+    },
+    {
+      "path": "plugins-dist/latex-runtime.js",
+      "sourceHash": "21ca798fb3fdd3a386e9e0559f09274611e1e83509b0b1a69cec70560dcfb779",
+      "localHash": "21ca798fb3fdd3a386e9e0559f09274611e1e83509b0b1a69cec70560dcfb779",
+      "modified": false
+    },
+    {
+      "path": "plugins-dist/slides-visuals.css",
+      "sourceHash": "dae86214e5f3f628deb6fec3f7bd871fa419f0310993cde9e845392ac16d9ec1",
+      "localHash": "dae86214e5f3f628deb6fec3f7bd871fa419f0310993cde9e845392ac16d9ec1",
+      "modified": false
+    },
+    {
+      "path": "plugins-dist/slides-visuals.js",
+      "sourceHash": "716059fbb0045af5305e552557368fe812569121986e0ce533f96753197c6ee1",
+      "localHash": "716059fbb0045af5305e552557368fe812569121986e0ce533f96753197c6ee1",
+      "modified": false
+    },
+    {
+      "path": "plugins-dist/slides-charts-lite-runtime.js",
+      "sourceHash": "e4ea98c49f8299297f82b339d215d8c844432ca9426ac462ef36eabf0a03190d",
+      "localHash": "e4ea98c49f8299297f82b339d215d8c844432ca9426ac462ef36eabf0a03190d",
+      "modified": false
+    },
+    {
+      "path": "plugins-dist/latex.js",
+      "sourceHash": "5475e344dc424e3015c3a8b2fd8152101354fe2622d322a0fa4f73d1335b4232",
+      "localHash": "5475e344dc424e3015c3a8b2fd8152101354fe2622d322a0fa4f73d1335b4232",
+      "modified": false
+    },
+    {
+      "path": "plugins-dist/slides-charts-lite.js",
+      "sourceHash": "ea1afbe48bc94c617af1ee2d53febcaa8d48e83253094a1cbef598f77ec15013",
+      "localHash": "ea1afbe48bc94c617af1ee2d53febcaa8d48e83253094a1cbef598f77ec15013",
+      "modified": false
+    },
+    {
+      "path": "plugins-dist/callouts.css",
+      "sourceHash": "7f8eb0c7f0aa75c9ce74b1f242e548e2fefcd4109c4ae93c93d479cbc08c1849",
+      "localHash": "7f8eb0c7f0aa75c9ce74b1f242e548e2fefcd4109c4ae93c93d479cbc08c1849",
+      "modified": false
+    },
+    {
+      "path": "plugins-dist/callouts.js",
+      "sourceHash": "94cc1a1a0ef4107b531defe915c6fbcc848e2b60c13c8cce7c5bbe6ae9130148",
+      "localHash": "94cc1a1a0ef4107b531defe915c6fbcc848e2b60c13c8cce7c5bbe6ae9130148",
+      "modified": false
+    }
+  ]
+}

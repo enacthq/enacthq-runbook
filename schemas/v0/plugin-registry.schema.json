@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kitfly.app/schemas/v0/plugin-registry.schema.json",
+  "$version": "0.2.0",
+  "title": "Plugin Registry",
+  "description": "Schema for kitfly canonical plugin registry (registry/plugins.yaml).",
+  "type": "object",
+  "required": [
+    "version",
+    "updated",
+    "baseUrl",
+    "plugins"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Schema reference for validation"
+    },
+    "version": {
+      "type": "integer",
+      "description": "Registry schema version",
+      "minimum": 1,
+      "examples": [
+        1
+      ]
+    },
+    "updated": {
+      "type": "string",
+      "description": "Last update date (YYYY-MM-DD)",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "examples": [
+        "2026-02-04"
+      ]
+    },
+    "baseUrl": {
+      "type": "string",
+      "description": "Base URL used for templating plugin asset URLs via ${baseUrl}",
+      "minLength": 0,
+      "maxLength": 200,
+      "examples": [
+        "https://github.com/3leaps/kitfly/releases/download"
+      ]
+    },
+    "plugins": {
+      "type": "object",
+      "description": "Plugin entries keyed by plugin id",
+      "minProperties": 0,
+      "patternProperties": {
+        "^[a-z][a-z0-9-]*$": {
+          "$ref": "#/$defs/registryPlugin"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "registryAssets": {
+      "type": "object",
+      "description": "Plugin asset URLs. Strings may include ${baseUrl} templating.",
+      "required": [
+        "assetSha256"
+      ],
+      "properties": {
+        "js": {
+          "type": "string",
+          "description": "JavaScript bundle URL (may include ${baseUrl})",
+          "minLength": 1
+        },
+        "css": {
+          "type": "string",
+          "description": "CSS bundle URL (may include ${baseUrl})",
+          "minLength": 1
+        },
+        "assetSha256": {
+          "type": "object",
+          "description": "Per-asset SHA256 checksums (sha256:<hex>) keyed by asset type.",
+          "properties": {
+            "js": {
+              "$ref": "./common.schema.json#/$defs/checksumSha256"
+            },
+            "css": {
+              "$ref": "./common.schema.json#/$defs/checksumSha256"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "required": [
+                "js"
+              ]
+            },
+            {
+              "required": [
+                "css"
+              ]
+            }
+          ]
+        },
+        {
+          "if": {
+            "required": [
+              "js"
+            ]
+          },
+          "then": {
+            "properties": {
+              "assetSha256": {
+                "required": [
+                  "js"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "css"
+            ]
+          },
+          "then": {
+            "properties": {
+              "assetSha256": {
+                "required": [
+                  "css"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "registryPlugin": {
+      "type": "object",
+      "required": [
+        "name",
+        "description",
+        "version",
+        "contract",
+        "kitfly",
+        "license",
+        "verified",
+        "assets"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable plugin name",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description used in listing/help output",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "version": {
+          "$ref": "./common.schema.json#/$defs/semver"
+        },
+        "contract": {
+          "type": "string",
+          "description": "Plugin contract version this plugin implements (stringified integer)",
+          "pattern": "^[0-9]+$",
+          "examples": [
+            "1"
+          ]
+        },
+        "kitfly": {
+          "$ref": "./common.schema.json#/$defs/semverRange"
+        },
+        "license": {
+          "type": "string",
+          "description": "License identifier (typically SPDX, e.g. MIT)",
+          "minLength": 1,
+          "maxLength": 50
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "If true, plugin is first-party / reviewed (canonical registry)"
+        },
+        "modes": {
+          "$ref": "./common.schema.json#/$defs/kitflyModesAllowlist"
+        },
+        "assets": {
+          "$ref": "#/$defs/registryAssets"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "$schema": "./schemas/v0/plugin-registry.schema.json",
+      "version": 1,
+      "updated": "2026-02-04",
+      "baseUrl": "https://github.com/3leaps/kitfly/releases/download",
+      "plugins": {
+        "latex": {
+          "name": "LaTeX/KaTeX Math Rendering",
+          "description": "Render LaTeX math expressions with KaTeX",
+          "version": "1.0.0",
+          "contract": "1",
+          "kitfly": ">=0.2.0 <1.0.0",
+          "license": "MIT",
+          "verified": true,
+          "assets": {
+            "js": "${baseUrl}/v1.0.0/latex.js",
+            "css": "${baseUrl}/v1.0.0/latex.css",
+            "assetSha256": {
+              "js": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+              "css": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

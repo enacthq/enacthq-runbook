@@ -1,0 +1,293 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kitfly.app/schemas/v0/theme.schema.json",
+  "$version": "0.1.0",
+  "title": "Kitfly Theme Configuration",
+  "description": "Color palette, typography, and code highlighting theme for kitfly sites",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Schema reference for validation"
+    },
+    "name": {
+      "type": "string",
+      "description": "Theme name for identification",
+      "maxLength": 50,
+      "examples": [
+        "Kitfly Default",
+        "GitHub",
+        "Paper"
+      ]
+    },
+    "layout": {
+      "type": "object",
+      "description": "Layout dimensions and spacing",
+      "properties": {
+        "sidebarWidth": {
+          "type": "string",
+          "description": "Sidebar width (CSS length value)",
+          "pattern": "^[0-9]+(px|rem|em|%)$",
+          "default": "280px",
+          "examples": [
+            "280px",
+            "320px",
+            "18rem"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "colors": {
+      "type": "object",
+      "description": "Color palettes for light and dark modes",
+      "required": [
+        "light",
+        "dark"
+      ],
+      "properties": {
+        "light": {
+          "$ref": "#/$defs/colorPalette"
+        },
+        "dark": {
+          "$ref": "#/$defs/colorPalette"
+        }
+      },
+      "additionalProperties": false
+    },
+    "code": {
+      "type": "object",
+      "description": "Prism.js syntax highlighting themes",
+      "properties": {
+        "light": {
+          "type": "string",
+          "description": "Prism theme for light mode",
+          "enum": [
+            "default",
+            "coy",
+            "solarized-light",
+            "tomorrow"
+          ],
+          "default": "default"
+        },
+        "dark": {
+          "type": "string",
+          "description": "Prism theme for dark mode",
+          "enum": [
+            "okaidia",
+            "tomorrow-night",
+            "nord",
+            "dracula",
+            "one-dark",
+            "synthwave84"
+          ],
+          "default": "okaidia"
+        }
+      },
+      "additionalProperties": false
+    },
+    "typography": {
+      "type": "object",
+      "description": "Font settings using system font stacks (no downloads)",
+      "properties": {
+        "body": {
+          "type": "string",
+          "description": "Font preset for body text",
+          "enum": [
+            "system",
+            "mono",
+            "serif",
+            "readable"
+          ],
+          "default": "system"
+        },
+        "headings": {
+          "type": "string",
+          "description": "Font preset for headings",
+          "enum": [
+            "system",
+            "mono",
+            "serif",
+            "readable"
+          ],
+          "default": "system"
+        },
+        "code": {
+          "type": "string",
+          "description": "Font preset for code blocks",
+          "enum": [
+            "mono"
+          ],
+          "default": "mono"
+        },
+        "baseSize": {
+          "type": "string",
+          "description": "Base font size",
+          "pattern": "^[0-9]+(px|rem|em)$",
+          "default": "16px",
+          "examples": [
+            "16px",
+            "17px",
+            "1rem"
+          ]
+        },
+        "scale": {
+          "type": "string",
+          "description": "Type scale ratio for heading sizes",
+          "enum": [
+            "1.125",
+            "1.2",
+            "1.25",
+            "1.333",
+            "1.5"
+          ],
+          "default": "1.25"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "colorPalette": {
+      "type": "object",
+      "description": "Color palette for a single mode (light or dark)",
+      "required": [
+        "background",
+        "surface",
+        "text",
+        "heading",
+        "primary",
+        "border"
+      ],
+      "properties": {
+        "background": {
+          "type": "string",
+          "description": "Page background color",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "examples": [
+            "#ffffff",
+            "#0f1e2b"
+          ]
+        },
+        "surface": {
+          "type": "string",
+          "description": "Elevated surface color (cards, code blocks)",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "examples": [
+            "#f5f7f8",
+            "#152F46"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "description": "Primary body text color",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "examples": [
+            "#374151",
+            "#e5e7eb"
+          ]
+        },
+        "textMuted": {
+          "type": "string",
+          "description": "Secondary/muted text color",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "examples": [
+            "#6b7280",
+            "#9ca3af"
+          ]
+        },
+        "heading": {
+          "type": "string",
+          "description": "Heading text color",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "examples": [
+            "#152F46",
+            "#f9fafb"
+          ]
+        },
+        "primary": {
+          "type": "string",
+          "description": "Primary accent color (links, buttons)",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "examples": [
+            "#007182",
+            "#4db8c7"
+          ]
+        },
+        "primaryHover": {
+          "type": "string",
+          "description": "Primary color hover state",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "examples": [
+            "#005c6a",
+            "#6cc9d6"
+          ]
+        },
+        "accent": {
+          "type": "string",
+          "description": "Secondary accent color (highlights, CTAs)",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "examples": [
+            "#D17059",
+            "#e8947f"
+          ]
+        },
+        "border": {
+          "type": "string",
+          "description": "Border and divider color",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "examples": [
+            "#e5e7eb",
+            "#374151"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "$schema": "./schemas/v0/theme.schema.json",
+      "name": "Kitfly Default",
+      "layout": {
+        "sidebarWidth": "280px"
+      },
+      "colors": {
+        "light": {
+          "background": "#ffffff",
+          "surface": "#f5f7f8",
+          "text": "#374151",
+          "textMuted": "#6b7280",
+          "heading": "#152F46",
+          "primary": "#007182",
+          "primaryHover": "#0a6172",
+          "accent": "#D17059",
+          "border": "#e5e7eb"
+        },
+        "dark": {
+          "background": "#0f1e2b",
+          "surface": "#152F46",
+          "text": "#e5e7eb",
+          "textMuted": "#9ca3af",
+          "heading": "#f9fafb",
+          "primary": "#709EA6",
+          "primaryHover": "#8fb5bc",
+          "accent": "#e8947f",
+          "border": "#374151"
+        }
+      },
+      "code": {
+        "light": "default",
+        "dark": "okaidia"
+      },
+      "typography": {
+        "body": "system",
+        "headings": "system",
+        "code": "mono",
+        "baseSize": "16px",
+        "scale": "1.25"
+      }
+    }
+  ]
+}

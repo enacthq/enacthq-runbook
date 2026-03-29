@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kitfly.app/schemas/v0/common.schema.json",
+  "$version": "0.2.0",
+  "title": "Kitfly Common Schema Definitions",
+  "description": "Shared $defs used across Kitfly schemas (v0).",
+  "$defs": {
+    "kitflyMode": {
+      "type": "string",
+      "description": "Kitfly rendering mode.",
+      "enum": [
+        "docs",
+        "slides"
+      ],
+      "examples": [
+        "docs",
+        "slides"
+      ]
+    },
+    "kitflyModesAllowlist": {
+      "type": "array",
+      "description": "Optional allowlist for where a plugin may run. If omitted, plugin is allowed in all modes. If present and empty, plugin is blocked in all modes.",
+      "items": {
+        "$ref": "#/$defs/kitflyMode"
+      },
+      "uniqueItems": true
+    },
+    "semver": {
+      "type": "string",
+      "description": "Semantic version string (semver).",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$",
+      "examples": [
+        "1.0.0",
+        "1.2.3-beta.1"
+      ]
+    },
+    "semverRange": {
+      "type": "string",
+      "description": "Version compatibility range (space-separated comparators). Example: \">=0.2.0 <1.0.0\"",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^\\s*(?:[<>=~^]*\\s*)?(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:\\s+(?:[<>=~^]*\\s*)?(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*))*\\s*$",
+      "examples": [
+        ">=0.2.0 <1.0.0"
+      ]
+    },
+    "sriIntegrity": {
+      "type": "string",
+      "description": "Subresource Integrity value (sha256/sha384/sha512 base64).",
+      "pattern": "^(sha256|sha384|sha512)-[A-Za-z0-9+/=]+$",
+      "examples": [
+        "sha384-abcDEF123+/="
+      ]
+    },
+    "checksumSha256": {
+      "type": "string",
+      "description": "SHA256 checksum (hex) prefixed with sha256:",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$",
+      "examples": [
+        "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+      ]
+    }
+  }
+}

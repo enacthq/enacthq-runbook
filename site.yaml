@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=./schemas/v0/site.schema.json
+schemaVersion: "0.2.3"
+# Enacthq Runbook - Site Configuration
+# Documentation: https://github.com/3leaps/kitfly
+
+title: "Enacthq Runbook"
+
+# ← CUSTOMIZE: Your brand settings
+brand:
+  name: "Enacthq Runbook"
+  url: "/"
+  # external: false  # Set true if brand URL is external
+
+# Content sections
+sections:
+  - name: "Procedures"
+    path: "content/procedures"
+  - name: "Troubleshooting"
+    path: "content/troubleshooting"
+  - name: "Reference"
+    path: "content/reference"
+  - name: "Incidents"
+    path: "content/incidents"
+
+# Home page
+home: "index.md"

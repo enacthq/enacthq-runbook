@@ -1,0 +1,17 @@
+{
+  "name": "enacthq-runbook",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Enacthq Runbook",
+  "scripts": {
+    "dev": "bun run scripts/dev.ts",
+    "build": "bun run scripts/build.ts",
+    "bundle": "bun run scripts/bundle.ts"
+  },
+  "dependencies": {
+    "marked": "^15.0.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.0"
+  }
+}

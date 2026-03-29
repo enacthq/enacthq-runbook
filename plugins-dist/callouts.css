@@ -1,0 +1,32 @@
+:root {
+  --kitfly-callout-border: var(--color-border);
+  --kitfly-callout-bg: var(--color-code-bg);
+  --kitfly-callout-title: var(--color-accent);
+}
+
+.kitfly-callout {
+  margin: 1rem 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--kitfly-callout-border);
+  border-left-width: 6px;
+  border-radius: 10px;
+  background: var(--kitfly-callout-bg);
+}
+
+.kitfly-callout > :first-child { margin-top: 0; }
+.kitfly-callout > :last-child { margin-bottom: 0; }
+
+.kitfly-callout-title {
+  font-weight: 700;
+  color: var(--kitfly-callout-title);
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95em;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.kitfly-callout--note { border-left-color: #2563eb; }
+.kitfly-callout--tip { border-left-color: #059669; }
+.kitfly-callout--info { border-left-color: #0ea5e9; }
+.kitfly-callout--warning { border-left-color: #d97706; }
+.kitfly-callout--danger { border-left-color: #dc2626; }

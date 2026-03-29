@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kitfly.app/schemas/v0/site.schema.json",
+  "$version": "0.1.0",
+  "title": "Site Configuration",
+  "description": "Configuration for Kitfly static site generator",
+  "type": "object",
+  "required": [
+    "title",
+    "brand",
+    "sections"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "description": "Schema version this config targets (for migration detection)",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "default": "0.1.0"
+    },
+    "docroot": {
+      "type": "string",
+      "description": "Root directory for content (relative to repo root)",
+      "default": "."
+    },
+    "dataroot": {
+      "type": "string",
+      "description": "Root directory for data binding files (relative to repo root)",
+      "default": "data"
+    },
+    "title": {
+      "type": "string",
+      "description": "Site title shown in browser tab and header",
+      "maxLength": 60
+    },
+    "version": {
+      "type": "string",
+      "description": "Site version shown in footer provenance. Supports literal values, auto (read VERSION in site root), or file:<path> (read from relative file).",
+      "examples": [
+        "1.0.0",
+        "2024.03",
+        "draft",
+        "auto",
+        "file:VERSION",
+        "file:./meta/site version.txt"
+      ]
+    },
+    "mode": {
+      "type": "string",
+      "description": "Site layout mode",
+      "enum": [
+        "docs",
+        "slides"
+      ],
+      "default": "docs"
+    },
+    "aspect": {
+      "type": "string",
+      "description": "Slide aspect ratio (only applies when mode is slides)",
+      "enum": [
+        "16/9",
+        "4/3",
+        "3/2",
+        "16/10"
+      ],
+      "default": "16/9"
+    },
+    "home": {
+      "type": "string",
+      "description": "Home page file (rendered as index.html, not in nav)"
+    },
+    "brand": {
+      "type": "object",
+      "description": "Brand configuration for logo and links",
+      "required": [
+        "name",
+        "url"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Brand name shown in sidebar",
+          "maxLength": 30
+        },
+        "url": {
+          "type": "string",
+          "description": "URL for brand logo link"
+        },
+        "external": {
+          "type": "boolean",
+          "description": "Open brand link in new tab (target=_blank)",
+          "default": false
+        },
+        "logo": {
+          "type": "string",
+          "description": "Path to logo image (relative to site root)",
+          "default": "assets/brand/logo.png"
+        },
+        "logoDark": {
+          "type": "string",
+          "description": "Path to dark mode logo image (relative to site root). Shown when dark theme is active."
+        },
+        "favicon": {
+          "type": "string",
+          "description": "Path to favicon image (relative to site root)",
+          "default": "assets/brand/favicon.png"
+        },
+        "logoType": {
+          "type": "string",
+          "description": "Logo type: icon (square) or wordmark (wide)",
+          "enum": [
+            "icon",
+            "wordmark"
+          ],
+          "default": "icon"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sections": {
+      "type": "array",
+      "description": "Navigation sections and their content sources",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "path"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Section name shown in navigation",
+            "maxLength": 20
+          },
+          "path": {
+            "type": "string",
+            "description": "Directory path relative to docroot"
+          },
+          "files": {
+            "type": "array",
+            "description": "Specific files to include (for root-level sections)",
+            "items": {
+              "type": "string"
+            }
+          },
+          "maxDepth": {
+            "type": "integer",
+            "description": "Maximum directory depth for auto-discovery",
+            "minimum": 0,
+            "maximum": 10,
+            "default": 4
+          },
+          "exclude": {
+            "type": "array",
+            "description": "Glob patterns to exclude from auto-discovery",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "footer": {
+      "type": "object",
+      "description": "Footer configuration for copyright, links, and attribution",
+      "properties": {
+        "copyright": {
+          "type": "string",
+          "description": "Override footer copyright text"
+        },
+        "copyrightUrl": {
+          "type": "string",
+          "description": "Make copyright text a clickable link to this URL"
+        },
+        "links": {
+          "type": "array",
+          "description": "Custom footer links (replaces default brand URL link)",
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "required": [
+              "text",
+              "url"
+            ],
+            "properties": {
+              "text": {
+                "type": "string",
+                "description": "Footer link label"
+              },
+              "url": {
+                "type": "string",
+                "description": "Footer link destination URL"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "attribution": {
+          "type": "boolean",
+          "description": "Show Built with Kitfly attribution",
+          "default": true
+        },
+        "logo": {
+          "type": "string",
+          "description": "Path to footer logo image (relative to site root)"
+        },
+        "logoDark": {
+          "type": "string",
+          "description": "Path to dark mode footer logo image (relative to site root)"
+        },
+        "logoUrl": {
+          "type": "string",
+          "description": "Make footer logo a clickable link to this URL"
+        },
+        "logoAlt": {
+          "type": "string",
+          "description": "Alt text for footer logo (defaults to copyright text if set, brand name otherwise)"
+        },
+        "logoHeight": {
+          "type": "integer",
+          "description": "Max height of footer logo in pixels",
+          "minimum": 10,
+          "maximum": 40,
+          "default": 20
+        }
+      },
+      "additionalProperties": false
+    },
+    "server": {
+      "type": "object",
+      "description": "Development server configuration",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "description": "Default port for dev server",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 3333
+        },
+        "host": {
+          "type": "string",
+          "description": "Default host for dev server",
+          "default": "localhost"
+        }
+      },
+      "additionalProperties": false
+    },
+    "prebuild": {
+      "type": "array",
+      "description": "Commands to run before dev/build/bundle",
+      "items": {
+        "type": "object",
+        "required": [
+          "command"
+        ],
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "Shell command to execute"
+          },
+          "watch": {
+            "type": "array",
+            "description": "File patterns that re-run this hook in dev mode",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

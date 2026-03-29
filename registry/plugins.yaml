@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../schemas/v0/plugin-registry.schema.json
+version: 1
+updated: "2026-02-15"
+baseUrl: "https://github.com/3leaps/kitfly/releases/download"
+# Canonical plugin registry (v0.2.1)
+plugins:
+  callouts:
+    name: "Callout Boxes"
+    description: "Turns blockquotes starting with NOTE:/TIP:/WARNING: into styled callouts"
+    version: "0.2.0"
+    contract: "1"
+    kitfly: ">=0.2.0 <1.0.0"
+    license: MIT
+    verified: true
+    assets:
+      js: "plugins-dist/callouts.js"
+      css: "plugins-dist/callouts.css"
+      assetSha256:
+        js: "sha256:94cc1a1a0ef4107b531defe915c6fbcc848e2b60c13c8cce7c5bbe6ae9130148"
+        css: "sha256:7f8eb0c7f0aa75c9ce74b1f242e548e2fefcd4109c4ae93c93d479cbc08c1849"
+  slides-visuals:
+    name: "Slides Visuals"
+    description: "Widgets and composed figures for Kitfly slides (::: blocks)"
+    version: "0.2.1"
+    contract: "1"
+    kitfly: ">=0.2.0 <1.0.0"
+    license: MIT
+    verified: true
+    modes: ["slides"]
+    assets:
+      js: "plugins-dist/slides-visuals.js"
+      css: "plugins-dist/slides-visuals.css"
+      assetSha256:
+        js: "sha256:716059fbb0045af5305e552557368fe812569121986e0ce533f96753197c6ee1"
+        css: "sha256:dae86214e5f3f628deb6fec3f7bd871fa419f0310993cde9e845392ac16d9ec1"
+  latex:
+    name: "LaTeX/KaTeX Math Rendering"
+    description: "LaTeX math rendering via KaTeX ($...$ inline, $$...$$ display, fenced math)"
+    version: "0.2.2"
+    contract: "1"
+    kitfly: ">=0.2.0 <1.0.0"
+    license: MIT
+    verified: true
+    assets:
+      js: "plugins-dist/latex.js"
+      assetSha256:
+        js: "sha256:5475e344dc424e3015c3a8b2fd8152101354fe2622d322a0fa4f73d1335b4232"
+  slides-charts-lite:
+    name: "Slides Charts Lite"
+    description: "Simple charts for Kitfly slides (bar, line, pie)"
+    version: "0.2.2"
+    contract: "1"
+    kitfly: ">=0.2.0 <1.0.0"
+    license: MIT
+    verified: true
+    modes: ["slides"]
+    assets:
+      js: "plugins-dist/slides-charts-lite.js"
+      assetSha256:
+        js: "sha256:ea1afbe48bc94c617af1ee2d53febcaa8d48e83253094a1cbef598f77ec15013"
