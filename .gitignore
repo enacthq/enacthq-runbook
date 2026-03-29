@@ -5,6 +5,11 @@ bundles/
 # Dependencies (if using kitfly as dependency)
 node_modules/
 
+# Agentic — local overrides and planning scratch
+AGENTS.local.md
+.plans/
+**/.claude/*local*
+
 # OS files
 .DS_Store
 Thumbs.db
